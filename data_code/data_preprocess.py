@@ -70,7 +70,7 @@ def preprocess(fruit, num_images):
 if not os.path.isdir('./data'):
     os.mkdir('./data')
 
-num_image = 25
+num_image = 350
 
 for fruit in ['apples', 'oranges', 'pears']:
     
