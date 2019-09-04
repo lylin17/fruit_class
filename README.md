@@ -27,11 +27,11 @@
 	paths = response.download(arguments) 
 	</code></pre>	
 	
-	c. Build docker image from Dockerfile as follows:   
+	d. Build docker image from Dockerfile as follows:   
 
 	<pre><code> docker build -t preprocess_data . </code></pre>   
 
-	d. Creating and start the container with data volume mounted to extract the generated pickle files as follows:
+	e. Creating and start the container with data volume mounted to extract the generated pickle files as follows:
 
 	<pre><code> docker run -v $(pwd):/data preprocess_data </code></pre>
 
@@ -41,13 +41,15 @@
 
 <pre><code>docker build -t solution .</code></pre>
 
-2. Launch dockerize jupyter notebook as follows 
+2. Create and run container as follows:
+
+3. Launch dockerized jupyter notebook by  
 
 3. Train and evaluate fruit classification model in notebook and extract model.h5 file 
 
 ## Built With
 
-Code tested with Docker version ? on Google Cloud Platform 
+Code tested with Docker Engine - Community Edition (version 19.03.1) on Google Cloud Platform 
 
 ## Author
 
