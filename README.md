@@ -13,11 +13,28 @@
 2. Pre-processed data used can be reproduce by executing the docker container in data_code:
 
 	a. Checking your chrome version [here](https://www.whatismybrowser.com/detect/what-version-of-chrome-do-i-have) and download the correct chromedriver [here](http://chromedriver.chromium.org/downloads)   
-	b. Build docker image from Dockerfile as follows:   
+	b. Unzip and move chromedriver.exe to the data_code folder
+	c. Run the following blocks of python code to scrap images from google using a chrome browser (google-images-download==2.5.0):
+
+	<pre><code> 
+	
+	response = google_images_download.googleimagesdownload()   
+
+	arguments = {"keywords": "apples fruit,oranges fruit,pears fruit",
+				 "limit": 101,
+				 "metadata": False,
+				 "chromedriver": "chromedriver.exe"}   
+
+	paths = response.download(arguments) 
+
+	</code></pre>
+	
+	
+	c. Build docker image from Dockerfile as follows:   
 
 	<pre><code> docker build -t preprocess_data . </code></pre>   
 
-	c. Creating and start the container with data volume mounted to extract the generated pickle files as follows:
+	d. Creating and start the container with data volume mounted to extract the generated pickle files as follows:
 
 	<pre><code> docker run -v $(pwd):/data preprocess_data </code></pre>
 
