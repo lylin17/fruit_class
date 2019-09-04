@@ -15,7 +15,7 @@
 	a. Checking your chrome version [here](https://www.whatismybrowser.com/detect/what-version-of-chrome-do-i-have) and download the correct chromedriver [here](http://chromedriver.chromium.org/downloads)   
 	b. Build docker image from Dockerfile as follows:   
 
-<pre><code> docker build -t preprocess_data . </code></pre>
+<pre><code> docker build -t preprocess_data . </code></pre>   
 
 	c. Creating and start the container with data volume mounted to extract the generated pickle files as follows:
 
