@@ -13,22 +13,19 @@
 2. Pre-processed data used can be reproduce by executing the docker container in data_code:
 
 	a. Checking your chrome version [here](https://www.whatismybrowser.com/detect/what-version-of-chrome-do-i-have) and download the correct chromedriver [here](http://chromedriver.chromium.org/downloads)   
-	b. Unzip and move chromedriver.exe to the data_code folder
+	b. Unzip and move chromedriver.exe to the data_code folder   
 	c. Run the following blocks of python code to scrap images from google using a chrome browser (google-images-download==2.5.0):
 
-	<pre><code> 
-	
+	<pre><code> 	
 	response = google_images_download.googleimagesdownload()   
 
 	arguments = {"keywords": "apples fruit,oranges fruit,pears fruit",
-				 "limit": 101,
+				 "limit": 400,
 				 "metadata": False,
 				 "chromedriver": "chromedriver.exe"}   
 
 	paths = response.download(arguments) 
-
-	</code></pre>
-	
+	</code></pre>	
 	
 	c. Build docker image from Dockerfile as follows:   
 
