@@ -69,17 +69,17 @@ To launch dockerized jupyter notebook in Google Cloud Platform, create SSH tunne
 
 <pre><code> gcloud compute ssh <instance_name> -- -L 8000:127.0.0.1:8000 </code></pre>
 
-To access Flask app through Google Cloud Platform, 
+To access Flask app through Google Cloud Platform,   
 	
-	1. create SSH tunnel as before using:   
+	a. create SSH tunnel as before using:   
 	
 	<pre><code> gcloud compute ssh <instance_name> -- -L 5000:127.0.0.1:5000 </code></pre>   
 
-	2. Set ip to 0.0.0.0 in app.py as follows:    
+	b. Set ip to 0.0.0.0 in app.py as follows:    
 
 	<pre><code> app.run(host='0.0.0.0', port=5000) </code></pre>   
 
-	3. Use the following address after running the app:    
+	c. Use the following address after running the app:    
 
 <pre><code> localhost:5000 </code></pre>   
 
