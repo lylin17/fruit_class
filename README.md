@@ -1,9 +1,9 @@
 # Fruit Classifer  
 
-- Built a Flask app to classify fruit images using Dockers
+- Built a Flask app to classify fruit images using Docker
 - Based on a simple fruit classification model using transfer learning and dockerize for reproduciblility
 - We will be building 3 containers for data preocessing, model training and deployment respectively. 
-- For data consistency, model training uses prepared processed data that are made available in google drive.
+- For data consistency, model training uses prepared processed data that are made available in dropbox.
 
 ## Solution
 
@@ -32,7 +32,7 @@
 
 	<pre><code> docker build -t preprocess_data . </code></pre>   
 
-	e. Create and start the container with data volume mounted (to extract the generated pickle files) as follows:
+	e. Create and start the container with data volume mounted (to access scapped images in downloads/ and to extract the generated pickle files) as follows:
 
 	<pre><code> docker run -v $(pwd):/data preprocess_data </code></pre>
 
@@ -48,7 +48,7 @@
 
 <pre><code> docker run -v $(pwd):/src -p 8000:8000 model </code></pre>
 
-3. Launch dockerized jupyter notebook by copying the URL given. For data consistency, we will used prepared data available on google drive.
+3. Launch dockerized jupyter notebook by copying the URL given. For data consistency, we will used prepared data available on dropbox.
 
 4. Train and evaluate fruit classification model in notebook and extract model.h5 file 
 
@@ -82,7 +82,7 @@ Code tested with Docker Engine - Community Edition (version 19.03.1) on Google C
 
 	c. Use the following address after running the app:    
 
-<pre><code> localhost:5000 </code></pre>   
+	<pre><code> localhost:5000 </code></pre>   
 
 ## Author
 

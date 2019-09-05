@@ -18,7 +18,6 @@ def preprocess(fruit, num_images):
     '''
     
     fruitlist = []
-    fruit_count = 0
     
     for filename in os.listdir("./downloads/{0} fruit".format(fruit)):
         try:
@@ -44,39 +43,40 @@ def preprocess(fruit, num_images):
             img = img.crop((left, top, right, bottom))
 
             arr = np.array(img)
-            if arr.shape == (244, 244, 3): fruitlist.append(np.array(img))
+            if arr.shape == (244, 244, 3): fruitlist.append(np.array(img))           
             
-            fruit_count +=1
-            
-            if fruit_count == num_images: break
-
         except:
             # Images with errors are ignored
-            None     
+            pass    
+        
+        #Stop if reach num_images of processed images
+        if np.stack(fruitlist).shape[0] == num_images: break
+        
+    allimg = np.stack(fruitlist)   
     
-    if fruit_count < num_images: raise ValueError('Available images less than num images!')
-    
-    allimg = np.stack(fruitlist) 
-    
-    #preprocess input array to required format by keras pre-trained model for transfer learning
-    fruit_arr = preprocess_input(allimg)[:num_images, :, :, :]
-                
+    #preprocess input array to required format by keras pre-trained model for transfer learning   
+    if allimg.shape[0] >= num_images:
+        fruit_arr = preprocess_input(allimg)[:num_images, :, :, :]   
+    else:
+        print('Available images less than num images!')
+        fruit_arr = None
+        
     return fruit_arr
-
-
+                
 #Data preprocessing
 
 #setup data directory in current directory if not present
 if not os.path.isdir('./data'):
     os.mkdir('./data')
 
-num_image = 350
+num_images = 350
 
 for fruit in ['apples', 'oranges', 'pears']:
     
-    fruit_arr = preprocess(fruit, num_image)
+    fruit_arr = preprocess(fruit, num_images)
     
-    with open('./data/x_{0}.pkl'.format(fruit), 'wb') as file:
+    if fruit_arr is not None:
+        with open('./data/x_{0}.pkl'.format(fruit), 'wb') as file:
             pickle.dump(fruit_arr, file)
 
       
