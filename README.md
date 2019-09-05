@@ -1,9 +1,9 @@
 # Fruit Classifer  
 
 - Built a Flask app to classify fruit images using Docker
-- Based on a simple fruit classification model using transfer learning and dockerize for reproduciblility
+- Based on a simple CNN classification model trained using transfer learning and dockerize for reproduciblility
 - We will be building 3 containers for data preocessing, model training and deployment respectively. 
-- For data consistency, model training uses prepared processed data that are made available in dropbox.
+- For data consistency, model training used prepared processed data that are made available in dropbox.
 
 ## Solution
 
