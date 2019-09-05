@@ -1,8 +1,9 @@
 # Fruit Classifer  
 
-- Build a simple fruit classification model using transfer learning   
-- Dockerize the model for reproduciblility
-- Unit test using pytest
+- Built a Flask app to classify fruit images using Dockers
+- Based on a simple fruit classification model using transfer learning and dockerize for reproduciblility
+- We will be building 3 containers for data preocessing, model training and deployment respectively. 
+- For data consistency, model training uses prepared processed data that are made available in google drive.
 
 ## Solution
 
@@ -37,25 +38,50 @@
 
 #### Solution Details 	
 
-##### Part A: Train Model
+###### Part A: Train Model
 
-1. Build docker image from Dockerfile as follows:
+1. In model folder, build docker image from Dockerfile as follows:
 
-<pre><code>docker build -t solution .</code></pre>
+<pre><code>docker build -t model .</code></pre>
 
 2. Create and start container with data volume mounted (to extract the generated model.h5 file) as follows:
 
-<pre><code> docker run -v $(pwd):/src -p 8000:8000 solution </code></pre>
+<pre><code> docker run -v $(pwd):/src -p 8000:8000 model </code></pre>
 
-3. Launch dockerized jupyter notebook by copying the URL given
+3. Launch dockerized jupyter notebook by copying the URL given. For data consistency, we will used prepared data available on google drive.
 
 4. Train and evaluate fruit classification model in notebook and extract model.h5 file 
 
 ###### Part B: Deployment
 
+1. In repository folder, build docker image from Dockerfile as follows:
+
+<pre><code>docker build -t deploy .</code></pre>
+
+2. Create and start container with data volume mounted (to read generated model.h5 file) as follows:
+
+<pre><code> docker run -v $(pwd)/model/model.h5:/src/model.h5 -p 5000:5000 deploy </code></pre>
+
 ## Built With
 
-Code tested with Docker Engine - Community Edition (version 19.03.1) on Google Cloud Platform 
+Code tested with Docker Engine - Community Edition (version 19.03.1) on Google Cloud Platform.
+To launch dockerized jupyter notebook in Google Cloud Platform, create SSH tunnel using:
+
+<pre><code> gcloud compute ssh <instance_name> -- -L 8000:127.0.0.1:8000 </code></pre>
+
+To access Flask app through Google Cloud Platform, 
+	
+	1. create SSH tunnel as before using:
+	
+	<pre><code> gcloud compute ssh <instance_name> -- -L 5000:127.0.0.1:5000 </code></pre>
+
+	2. Set ip to 0.0.0.0 in app.py as follows:
+
+	<pre><code> app.run(host='0.0.0.0', port=5000) </code></pre>
+
+	3. Use the following address after running the app:
+
+<pre><code> localhost:5000 </code></pre>
 
 ## Author
 
