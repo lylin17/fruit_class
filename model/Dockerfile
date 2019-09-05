@@ -15,8 +15,8 @@ RUN pip install jupyter
 #Copy required files
 COPY . .
 
-#Expose port 80
-EXPOSE 80
+#Expose port 8000
+EXPOSE 8000
 
 #Run data pre_processing script
 CMD [ "jupyter", "notebook", "--ip='*'", "--port=8000", "--no-browser", "--allow-root" ]

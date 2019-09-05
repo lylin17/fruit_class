@@ -37,17 +37,21 @@
 
 #### Solution Details 	
 
+##### Part A: Train Model
+
 1. Build docker image from Dockerfile as follows:
 
 <pre><code>docker build -t solution .</code></pre>
 
 2. Create and start container with data volume mounted (to extract the generated model.h5 file) as follows:
 
-<pre><code> docker run -v $(pwd):/src -p 8000:80 solution </code></pre>
+<pre><code> docker run -v $(pwd):/src -p 8000:8000 solution </code></pre>
 
 3. Launch dockerized jupyter notebook by copying the URL given
 
-3. Train and evaluate fruit classification model in notebook and extract model.h5 file 
+4. Train and evaluate fruit classification model in notebook and extract model.h5 file 
+
+###### Part B: Deployment
 
 ## Built With
 
