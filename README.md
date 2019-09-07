@@ -2,8 +2,9 @@
 
 - Built a Flask app to classify fruit images using Docker
 - Based on a simple CNN classification model trained using transfer learning and dockerize for reproduciblility
-- We will be building 3 containers for data preocessing, model training and deployment respectively. 
+- We will be building 3 containers for data preprocessing, model training and deployment respectively. 
 - For data consistency, model training used prepared processed data that are made available in dropbox.
+- For each container, test suite for unit testing using pytest is available.
 
 ## Solution
 
@@ -11,7 +12,7 @@
 
 1. Install docker engine as shown [here](https://docs.docker.com/install/)
 
-2. Pre-processed data used can be reproduce by executing the docker container in data_code:
+2. Pre-processed data used can be reproduce by executing the docker container in *data_code folder*:
 
 	a. Checking your chrome version [here](https://www.whatismybrowser.com/detect/what-version-of-chrome-do-i-have) and download the correct chromedriver [here](http://chromedriver.chromium.org/downloads)   
 	b. Unzip and move chromedriver.exe to the data_code folder   
@@ -30,17 +31,27 @@
 	
 	d. Build docker image from Dockerfile as follows:   
 
-	<pre><code> docker build -t preprocess_data . </code></pre>   
+	<pre><code>docker build -t preprocess_data .</code></pre>  
 
-	e. Create and start the container with data volume mounted (to access scapped images in downloads/ and to extract the generated pickle files) as follows:
+	e. Create and start the container to run data preprocessing with data volume mounted (to access scapped images in downloads/ and to extract the generated pickle files) as follows:   
+	
+	<pre><code>docker run -v $(pwd):/data preprocess_data</code></pre>   
 
-	<pre><code> docker run -v $(pwd):/data preprocess_data </code></pre>
+	f. If required, unit testing of the data preprocessing code can be performed with pytest as follows:
+
+		i. Enter container bash as follows(CONTAINER_ID can be found using docker ps -a):   
+	
+		<pre><code>docker exec -it <CONTAINER_ID> bash</code></pre>   
+
+		ii. Run pytest with the appriopriate flags(e.g. -v for verbose) as follows:    
+
+		<pre><code>pytest -v</code></pre>   	
 
 #### Solution Details 	
 
 ###### Part A: Train Model
 
-1. In model folder, build docker image from Dockerfile as follows:
+1. In *model folder*, build docker image from Dockerfile as follows:
 
 <pre><code>docker build -t model .</code></pre>
 
