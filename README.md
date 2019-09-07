@@ -37,7 +37,7 @@
 	
 	<pre><code>docker run -v $(pwd):/data preprocess_data</code></pre>   
 
-3. If unit testing of code in the image is required, pytest(with the appropriate flags, e.g. -v for verbose) can be ran instead as follows:
+3. If unit testing of code in the image is required, pytest(with the appropriate flags, e.g. -v for verbose) can be ran in a one-time container instead as follows:
 	
 	<pre><code>docker run -v $(pwd):/data preprocess_data --rm pytest -v</code></pre>     	
 
@@ -51,21 +51,25 @@
 
 2. Create and start container with data volume mounted (to extract the generated model.h5 file) as follows:
 
-<pre><code> docker run -v $(pwd):/src -p 8000:8000 model </code></pre>
+<pre><code>docker run -v $(pwd):/src -p 8000:8000 model</code></pre>
 
 3. Launch dockerized jupyter notebook by copying the URL given. For data consistency, we will used prepared data available on dropbox.
 
 4. Train and evaluate fruit classification model in notebook and extract model.h5 file 
 
+3. If unit testing of code in the image is required, pytest(with the appropriate flags, e.g. -v for verbose) can be ran in a one-time container instead as follows:
+	
+	<pre><code>docker run --rm model pytest -v</code></pre> 
+
 ###### Part B: Deployment
 
-1. In repository folder, build docker image from Dockerfile as follows:
+1. In *repository folder*, build docker image from Dockerfile as follows:
 
 <pre><code>docker build -t deploy .</code></pre>
 
 2. Create and start container with data volume mounted (to read generated model.h5 file) as follows:
 
-<pre><code> docker run -v $(pwd)/model/model.h5:/src/model.h5 -p 5000:5000 deploy </code></pre>
+<pre><code>docker run -v $(pwd)/model/model.h5:/src/model.h5 -p 5000:5000 deploy</code></pre>
 
 ## Built With
 
@@ -73,21 +77,21 @@ Code tested with Docker Engine - Community Edition (version 19.03.1) on Google C
 
 1. To launch dockerized jupyter notebook in Google Cloud Platform, create SSH tunnel using:
 
-<pre><code> gcloud compute ssh <instance_name> -- -L 8000:127.0.0.1:8000 </code></pre>
+<pre><code>gcloud compute ssh <instance_name> -- -L 8000:127.0.0.1:8000</code></pre>
 
 2. To access Flask app through Google Cloud Platform,   
 	
 	a. create SSH tunnel as before using:   
 	
-	<pre><code> gcloud compute ssh <instance_name> -- -L 5000:127.0.0.1:5000 </code></pre>   
+	<pre><code>gcloud compute ssh <instance_name> -- -L 5000:localhost:5000</code></pre>   
 
 	b. Set ip to 0.0.0.0 in app.py as follows:    
 
-	<pre><code> app.run(host='0.0.0.0', port=5000) </code></pre>   
+	<pre><code>app.run(host='0.0.0.0', port=5000)</code></pre>   
 
 	c. Use the following address after running the app:    
 
-	<pre><code> localhost:5000 </code></pre>   
+	<pre><code>localhost:5000</code></pre>   
 
 ## Author
 
