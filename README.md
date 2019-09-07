@@ -2,9 +2,9 @@
 
 - Built a Flask app to classify fruit images using Docker
 - Based on a simple CNN classification model trained using transfer learning and dockerize for reproduciblility
-- We will be building 3 containers for data preprocessing, model training and deployment respectively. 
+- We will be building 3 docker images for data preprocessing, model training and deployment respectively. 
 - For data consistency, model training used prepared processed data that are made available in dropbox.
-- For each container, test suite for unit testing using pytest is available.
+- For each image, test suite for unit testing using pytest is available.
 
 ## Solution
 
@@ -37,7 +37,7 @@
 	
 	<pre><code>docker run -v $(pwd):/data preprocess_data</code></pre>   
 
-3. If unit testing of the data preprocess code in the image is required, pytest (with the appropriate flags, e.g. -v for verbose) can be ran instead as follows:
+3. If unit testing of code in the image is required, pytest(with the appropriate flags, e.g. -v for verbose) can be ran instead as follows:
 	
 	<pre><code>docker run -v $(pwd):/data preprocess_data --rm pytest -v</code></pre>     	
 
