@@ -37,15 +37,9 @@
 	
 	<pre><code>docker run -v $(pwd):/data preprocess_data</code></pre>   
 
-3. If required, unit testing of the data preprocessing code can be performed with pytest as follows:
-
-	a. Enter container bash as follows(CONTAINER_ID can be found using docker ps -a):   
+3. If unit testing of the data preprocess code in the image is required, pytest (with the appropriate flags, e.g. -v for verbose) can be ran instead as follows:
 	
-	<pre><code>docker exec -it [CONTAINER_ID] bash</code></pre>   
-
-	b. Run pytest with the appriopriate flags(e.g. -v for verbose) as follows:    
-
-	<pre><code>pytest -v</code></pre>   	
+	<pre><code>docker run -v $(pwd):/data preprocess_data --rm pytest -v</code></pre>     	
 
 #### Solution Details 	
 
