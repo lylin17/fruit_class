@@ -12,7 +12,7 @@
 
 1. Install docker engine as shown [here](https://docs.docker.com/install/)
 
-2. Pre-processed data used can be reproduce by executing the docker container in *data_code folder*:
+2. Pre-processed data used can be reproduce by executing the docker container in **data_code folder**:
 
 	a. Checking your chrome version [here](https://www.whatismybrowser.com/detect/what-version-of-chrome-do-i-have) and download the correct chromedriver [here](http://chromedriver.chromium.org/downloads)   
 	b. Unzip and move chromedriver.exe to the data_code folder   
@@ -45,7 +45,7 @@
 
 ###### Part A: Train Model
 
-1. In *model folder*, build docker image from Dockerfile as follows:
+1. In **model folder**, build docker image from Dockerfile as follows:
 
 <pre><code>docker build -t model .</code></pre>
 
@@ -63,7 +63,7 @@
 
 ###### Part B: Deployment
 
-1. In *repository folder*, build docker image from Dockerfile as follows:
+1. In **repository folder**, build docker image from Dockerfile as follows:
 
 <pre><code>docker build -t deploy .</code></pre>
 
@@ -77,7 +77,7 @@ Code tested with Docker Engine - Community Edition (version 19.03.1) on Google C
 
 1. To launch dockerized jupyter notebook in Google Cloud Platform, create SSH tunnel using:
 
-<pre><code>gcloud compute ssh <instance_name> -- -L 8000:127.0.0.1:8000</code></pre>
+<pre><code>gcloud compute ssh <INSTANCE_NAME> -- -L 8000:127.0.0.1:8000</code></pre>
 
 2. To access Flask app through Google Cloud Platform,   
 	
